@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}LeafScan AI — Result{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+
+        <div class="card shadow-sm mb-4">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <img src="{{ image_url }}" alt="Uploaded tea leaf" class="img-fluid rounded-start h-100 w-100" style="object-fit: cover;">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body p-4">
+
+                        <h5 class="text-muted mb-1">Prediction</h5>
+                        <h2 class="fw-bold text-success mb-3">{{ predicted_class }}</h2>
+
+                        <p class="mb-1 fw-semibold">Confidence: {{ confidence }}%</p>
+                        <div class="progress mb-4" style="height: 10px;">
+                            <div
+                                class="progress-bar bg-success"
+                                role="progressbar"
+                                style="width: {{ confidence }}%;"
+                                aria-valuenow="{{ confidence }}"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                            ></div>
+                        </div>
+
+                        <h6 class="fw-semibold">Suggested Treatment / Management</h6>
+                        <p class="text-muted">{{ treatment }}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body p-4">
+                <h6 class="fw-semibold mb-3">Confidence Across All Classes</h6>
+                {% for class_name, prob in all_probabilities.items() %}
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between">
+                            <small>{{ class_name }}</small>
+                            <small>{{ prob }}%</small>
+                        </div>
+                        <div class="progress" style="height: 6px;">
+                            <div
+                                class="progress-bar {% if class_name == predicted_class %}bg-success{% else %}bg-secondary{% endif %}"
+                                role="progressbar"
+                                style="width: {{ prob }}%;"
+                            ></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('index') }}" class="btn btn-outline-success">Analyze Another Image</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

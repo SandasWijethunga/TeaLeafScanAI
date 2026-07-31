@@ -1,0 +1,22 @@
+/* TeaCare AI — custom styling on top of Bootstrap defaults */
+
+body {
+    background-color: #f7f9f7;
+}
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+}
+
+.navbar-brand {
+    font-size: 1.3rem;
+}
+
+.progress {
+    border-radius: 1rem;
+}
+
+footer {
+    background-color: #ffffff;
+}

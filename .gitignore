@@ -1,0 +1,29 @@
+# Model artifacts (version with DVC — see docs/DVC_GUIDE.md)
+**/models/*.keras
+**/models/*.h5
+
+# Dataset
+data/
+
+# Runtime-generated
+logs/
+**/static/uploads/*
+!**/static/uploads/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS/editor
+.DS_Store
+.vscode/

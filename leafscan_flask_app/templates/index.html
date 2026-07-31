@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}LeafScan AI — Upload a Tea Leaf Image{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+
+        <div class="text-center mb-4">
+            <h1 class="fw-bold">Tea Leaf Disease Detection (v2)</h1>
+            <p class="text-muted">
+                Upload a photo of a tea leaf and LeafScan AI will identify
+                whether it's healthy or affected by one of 3 common conditions,
+                along with suggested treatment steps.
+            </p>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <form action="{{ url_for('predict') }}" method="POST" enctype="multipart/form-data">
+
+                    <div class="mb-3">
+                        <label for="file" class="form-label fw-semibold">Tea Leaf Image</label>
+                        <input
+                            class="form-control"
+                            type="file"
+                            id="file"
+                            name="file"
+                            accept="image/png, image/jpeg"
+                            required
+                        >
+                        <div class="form-text">Accepted formats: JPG, PNG. Max size: 5MB.</div>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <img id="preview" src="#" alt="Image preview" class="img-fluid rounded d-none" style="max-height: 300px;">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            Analyze Leaf
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

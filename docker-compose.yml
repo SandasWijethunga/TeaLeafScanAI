@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: ./leafscan_flask_app
+      dockerfile: Dockerfile
+    container_name: leafscan_web
+    ports:
+      - "5001:5000"   # host port 5001 to avoid clashing with TeaCare AI's web app on 5000
+    volumes:
+      - ./models:/app/models:ro
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./leafscan_api_app
+      dockerfile: Dockerfile
+    container_name: leafscan_api
+    ports:
+      - "8001:8000"   # host port 8001 to avoid clashing with TeaCare AI's API on 8000
+    volumes:
+      - ./models:/app/models:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
